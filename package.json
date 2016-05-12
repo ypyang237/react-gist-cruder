@@ -2,7 +2,7 @@
   "name": "react-webpack-template",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "home_page.js",
   "scripts": {
     "start": "webpack --progress --colors --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,8 +10,10 @@
   "author": "",
   "license": "BSD-2-Clause",
   "dependencies": {
+    "babel-loader": "^6.2.4",
     "react": "^0.14.5",
-    "react-dom": "^0.14.5"
+    "react-dom": "^0.14.5",
+    "webpack": "^1.13.0"
   },
   "devDependencies": {
     "babel-core": "^6.3.26",
