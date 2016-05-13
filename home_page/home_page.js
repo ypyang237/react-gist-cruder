@@ -3,6 +3,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var GistList = require('./gist_list.js');
+var oneGistItem = require('./gist_item.js');
 
 
   const HomePage = React.createClass({
@@ -11,6 +12,8 @@ var GistList = require('./gist_list.js');
         return {
           // route: window.location.hash.substr(1)
          gists : [],
+         oneGistItem: '',
+         contentUrl: '',
          userUrl: '',
          id : '',
          accessToken: ''
@@ -23,6 +26,7 @@ var GistList = require('./gist_list.js');
       var username = anchor.split('username=')[1];
       var token = (anchor.split('=')[1]).split('&')[0]
 
+
       this.setState({ userUrl: 'https://api.github.com/users/'+ username + '/gists' });
       this.setState({ accessToken: token})
     },
@@ -30,7 +34,6 @@ var GistList = require('./gist_list.js');
 
 
     loadDataFromGithub: function() {
-      console.log(this.state);
       $.ajax({
         url: this.state.userUrl,
         type: 'GET',
@@ -40,14 +43,18 @@ var GistList = require('./gist_list.js');
         dataType: 'json',
         cache: false,
         success: function(data) {
-          console.log('data', data);
           this.setState({ gists: data })
         }.bind(this),
         error: function(xhr, status, err) {
           console.error(this.props.userUrl, status, err.toString());
         }.bind(this)
       })
+
     },
+
+
+
+
 
     componentDidMount: function() {
       // window.addEventListener('hashchange', _ => {
@@ -56,6 +63,14 @@ var GistList = require('./gist_list.js');
       //   })
       // });
       this.loadDataFromGithub();
+
+      var contentUrl = (this.props)
+      // this.setState({ contentUrl: contentUrl});
+      console.log('URL', contentUrl)
+
+      window.addEventListener('click', this.loadOneGistItem, false)
+
+
     },
 
 
@@ -63,7 +78,8 @@ var GistList = require('./gist_list.js');
       return (
         <div>
           <h1> Gist Manager </h1>
-          <GistList gists={this.state.gists} />
+          <GistList gists={this.state.gists} accessToken={this.state.accessToken} />
+          <oneGistContent oneGist={this.state.oneGistItem} />
         </div>
         )
     }
