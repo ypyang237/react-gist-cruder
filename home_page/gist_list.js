@@ -6,11 +6,12 @@ var React = require('react');
 
 const GistList = React.createClass({
   render: function() {
-    var gistListNode = this.props.myGists.map(function(oneGistItem) {
+    console.log('this.props',this.props)
+    var gistListNode = this.props.gists.map(function(oneGistItem) {
           return (
-            <p key={oneGistItem.id}>
-              {oneGistItem.title}
-            </p>
+            <oneGistItem key={oneGistItem.id}>
+              {oneGistItem.description}
+            </oneGistItem>
           )
     })
 

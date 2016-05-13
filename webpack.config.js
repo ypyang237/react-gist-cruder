@@ -3,7 +3,7 @@ var path = require('path');
 module.exports = {
   entry: './home_page/home_page.js',
   output: {
-    filename: '/public/js/browser-bundle.js'
+    filename: './public/js/browser-bundle.js'
   },
   devtool: 'inline-source-map',
   module: {
