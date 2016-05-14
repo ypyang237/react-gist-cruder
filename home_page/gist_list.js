@@ -1,7 +1,16 @@
 'use strict';
 var React = require('react');
+var GistItem = require('./gist_item.js');
+
 
 const GistList = React.createClass({
+
+
+  getInitialState: function() {
+      return {
+        oneGistContent: ''
+      };
+  },
 
 
   onItemClick: function(item) {
@@ -17,29 +26,34 @@ const GistList = React.createClass({
         dataType: 'json',
         cache: false,
         success: function(data) {
-          console.log('data', data);
-          this.setState({ oneGistItem: data })
+          var mother = data.files
+
+          var readMes = Object.keys(mother)
+
+          var keyData = mother[readMes[0]].content
+
+          this.setState({ oneGistContent: keyData })
+          console.log('this.state.oneGistCOntent', this.state.oneGistContent);
         }.bind(this),
         error: function(xhr, status, err) {
           console.error(this.props.userUrl, status, err.toString());
         }.bind(this)
       })
-    },
 
+    },
 
 
 
   render: function() {
     var component = this;
-    var gistListNode = this.props.gists.map(function(oneGistItem) {
+    var gistListNode = this.props.gists.map(function(oneGistTitle) {
 
-          let boundItemClick = component.onItemClick.bind(this, oneGistItem);
+          let boundItemClick = component.onItemClick.bind(this, oneGistTitle);
 
           return (
-            <oneGistItem key={oneGistItem.id} id={oneGistItem.url} onClick={boundItemClick}>
-              {oneGistItem.description}
-              {oneGistItem.url}
-            </oneGistItem>
+            <p key={oneGistTitle.id} id={oneGistTitle.url} onClick={boundItemClick}>
+              {oneGistTitle.description}
+            </p>
           )
     })
 
@@ -48,6 +62,7 @@ const GistList = React.createClass({
       <div className="GistList">
         <h2> GistList</h2>
         <div> {gistListNode} </div>
+        <GistItem  content={this.state.oneGistContent}/>
       </div>
       )
   }

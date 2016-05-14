@@ -3,7 +3,6 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var GistList = require('./gist_list.js');
-var oneGistItem = require('./gist_item.js');
 
 
   const HomePage = React.createClass({
@@ -13,7 +12,6 @@ var oneGistItem = require('./gist_item.js');
           // route: window.location.hash.substr(1)
          gists : [],
          oneGistItem: '',
-         contentUrl: '',
          userUrl: '',
          id : '',
          accessToken: ''
@@ -64,13 +62,6 @@ var oneGistItem = require('./gist_item.js');
       // });
       this.loadDataFromGithub();
 
-      var contentUrl = (this.props)
-      // this.setState({ contentUrl: contentUrl});
-      console.log('URL', contentUrl)
-
-      window.addEventListener('click', this.loadOneGistItem, false)
-
-
     },
 
 
@@ -79,7 +70,6 @@ var oneGistItem = require('./gist_item.js');
         <div>
           <h1> Gist Manager </h1>
           <GistList gists={this.state.gists} accessToken={this.state.accessToken} />
-          <oneGistContent oneGist={this.state.oneGistItem} />
         </div>
         )
     }

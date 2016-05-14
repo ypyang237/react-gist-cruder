@@ -2,14 +2,14 @@
 
 var React = require('react');
 
-const oneGistItem = React.createClass({
+const GistItem = React.createClass({
 
   render: function() {
-    console.log('this.props',this.props);
-
+    console.log(this.props)
     return (
-      <div className="oneGistItem">
-      <h1> one Gist item </h1>
+      <div className="GistItem">
+      <h1> one Gist Content </h1>
+      <p> {this.props.content} </p>
       </div>
 
       )
@@ -19,7 +19,7 @@ const oneGistItem = React.createClass({
 
 })
 
-module.exports = oneGistItem;
+module.exports = GistItem;
 
 
 
