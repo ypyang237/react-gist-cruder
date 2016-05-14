@@ -28,8 +28,6 @@ const React    = require('react'),
         this.setState({ accessToken: token})
       }
 
-
-
     },
 
     loadDataFromGithub: function() {
