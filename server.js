@@ -56,7 +56,6 @@ app.get('/auth/github',
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
   function(req, res) {
-console.log('beep')
     var data = queryString.stringify({
       accessToken : req.user.accessToken,
       id : req.user.id,
@@ -70,8 +69,11 @@ app.get('/user', ensureAuthenticated, function(req, res){
   res.json(req.user);
 });
 
-app.get('*', function (request, response){
-  response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+app.get('*', function(req, res){
+  res.sendFile('./public/index.html',
+              {
+                root  : __dirname
+              });
 });
 
 app.listen(PORT, function(){

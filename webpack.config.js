@@ -1,11 +1,9 @@
-var path = require('path');
-
 module.exports = {
-  entry: './home_page/home_page.js',
+  entry: './react-src/main.js',
   output: {
     filename: './public/js/browser-bundle.js'
   },
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   module: {
     loaders: [
       {
