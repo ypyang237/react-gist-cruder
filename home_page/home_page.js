@@ -1,6 +1,12 @@
 'use strict';
-var React = require('react');
-var ReactDOM = require('react-dom');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const ReactRouter = require('react-router');
+const Router = ReactRouter.Router;
+const Route = ReactRouter.Route
+const Link = ReactRouter.Link
+const BrowserHistory = ReactRouter.browserHistory
+const IndexRoute = ReactRouter.IndexRoute
 
 var GistList = require('./gist_list.js');
 
@@ -69,8 +75,39 @@ var GistList = require('./gist_list.js');
       return (
         <div>
           <h1> Gist Manager </h1>
+          <li><Link to="/new"> Create New Gist </Link></li>
+
           <GistList gists={this.state.gists} accessToken={this.state.accessToken} />
         </div>
+        )
+    }
+
+  })
+
+
+  const App = React.createClass({
+    render: function() {
+      return(
+      <div className="app">
+        <h1> Welcome to Gist CRUDer </h1>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/new"> Create New Gist </Link></li>
+        </ul>
+         {this.props.children}
+      </div>
+      )
+    }
+
+  })
+
+
+  const New = React.createClass({
+    render: function() {
+      return (
+          <div>
+           <h2>New</h2>
+          </div>
         )
     }
 
@@ -82,7 +119,14 @@ var GistList = require('./gist_list.js');
 
 
 ReactDOM.render(
-  <HomePage />,
-  document.getElementById('content')
-  )
+  (
+    (
+    <Router history={BrowserHistory}>
+      <Route path="/" component={App}>
+        <Route path="new" component={New}> </Route>
+      </Route>
+    </Router>
+    )
+
+  ), document.getElementById('content'))
 

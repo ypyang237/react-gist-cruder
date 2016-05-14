@@ -70,6 +70,10 @@ app.get('/user', ensureAuthenticated, function(req, res){
   res.json(req.user);
 });
 
+app.get('*', function (request, response){
+  response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+});
+
 app.listen(PORT, function(){
   console.log(`Server listening on port: ${PORT}`);
 });
